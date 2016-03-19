@@ -102,7 +102,7 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             #+'F[3, 0]\tF[3, 1]\tF[3, 2]\tF[3, 3]\n'
             +'U[0]\tU[1]\tU[2]\tU[3]\n'
             
-            + '# (' + printing_units_time + ')\t('
+            + '# (' + printing_units_time + ')\t'
             
             + '(' + printing_units_length + ')\t'
             + '(' + printing_units_length + ')\t'
