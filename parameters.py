@@ -18,7 +18,7 @@ n = int(1e3)
 # ----------------------------------------------------------------------
 
 # Initial time.
-t0 = Q_(np.asarray([0.], 'second')
+t0 = Q_(np.asarray([0.]), 'second')
 
 # Initial position.
 r0 = Q_(np.asarray([[0., 0., 0.]]), 'meter')
