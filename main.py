@@ -98,7 +98,7 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             #+str(F[3,0])+'\t'+str(F[3,1])+'\t'+str(F[3,2])+'\t'+str(F[3,3])
             )
         for i in range(n):
-            t, X, U = step(h, t, y, qmr, F)
+            t, X, U = step(h, t, X, U, qmr, F)
             fname.write(str(t)+'\t'
                 +str(X[0])+'\t'+str(X[1])+'\t'+str(X[2])+'\t'+str(X[3])+'\t'
                 +str(U[0])+'\t'+str(U[1])+'\t'+str(U[2])+'\t'+str(U[3]) #+'\t'
