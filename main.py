@@ -36,13 +36,24 @@ def setutc():
 
 # ======================================================================
 
-def make_unit_array(a):
+def make_unit_array_1d(a):
     u = a[0].units
     n = len(a)
     b = np.empty(n)
     for i in range(n):
         b[i] = a[i].to(u).magnitude
     return Q_(b, u)
+
+def make_unit_array_2d(a):
+    u = a[0][0].units
+    m = len(a)
+    n = len(a[0])
+    b = np.empty((m, n))
+    for i in range(m):
+        for j in range(n):
+            b[i, j] = a[i][j].to(u).magnitude
+    return Q_(b, u)
+    
 
 # ======================================================================
 
@@ -144,7 +155,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
             print('r0:', r0)
             
             # Initial four-position.
-            X0 = make_unit_array([t0*c, r0[0], r0[1], r0[2]])
+            X0 = make_unit_array_1d([t0*c, r0[0], r0[1], r0[2]])
             
             for i_vhat0 in range(num_vhat0):
                 vhat0 = param.vhat0[i_vhat0]
@@ -176,7 +187,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
                             v0 = vhat0 * speed0
                             
                             # Initial four-velocity.
-                            U0 = gamma0*make_unit_array(
+                            U0 = gamma0*make_unit_array_1d(
                                 [c, v0[0], v0[1], v0[2]])
                             
                             for i_By in range(num_By):
@@ -191,11 +202,13 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
                                 
                                 Bz = Bx
                                 
-                                F = np.asarray(
-                                    [[  0., Ex_c, Ey_c, Ez_c],
-                                     [Ex_c,   0.,   Bz,  -By],
-                                     [Ey_c,  -Bz,    0.,  Bx],
-                                     [Ez_c,   By,   -Bx,  0.]])
+                                zero = Q_(0., 'tesla')
+                                
+                                F = make_unit_array_2d(
+                                    [[zero, Ex_c, Ey_c, Ez_c],
+                                     [Ex_c, zero,   Bz,  -By],
+                                     [Ey_c,  -Bz, zero,   Bx],
+                                     [Ez_c,   By,  -Bx, zero]])
                                 
                                 for i_h in range(num_h):
                                     h = param.h[i_h]
