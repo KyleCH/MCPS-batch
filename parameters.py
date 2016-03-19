@@ -21,7 +21,7 @@ n = int(1e3)
 t0 = Q_(np.asarray([0.], 'second')
 
 # Initial position.
-r0 = Q_(np.asarray([[0., 0., 0.]], 'meter')
+r0 = Q_(np.asarray([[0., 0., 0.]]), 'meter')
 
 # Initial velocity unit vector.
 vhat0 = np.asarray([[0., 0., 1.]])
