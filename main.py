@@ -120,7 +120,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
     num_r0 = param.r0.shape[0]
     num_vhat0 = param.vhat0.shape[0]
     num_q = param.q.shape[0]
-    num_m = param.m.shape[0]
+    num_m = len(param.m)
     num_T0 = param.T0.shape[0]
     num_By = param.By.shape[0]
     num_h = param.h.shape[0]
