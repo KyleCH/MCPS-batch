@@ -134,7 +134,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
             print('r0:', r0)
             
             # Initial four-position.
-            X0 = np.append([t0*c, r0[0], r0[1], r0[2]])
+            X0 = np.asarray([t0*c, r0[0], r0[1], r0[2]])
             
             for i_vhat0 in range(num_vhat0):
                 vhat0 = param.vhat0[i_vhat0]
@@ -166,7 +166,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
                             v0 = vhat0 * speed0
                             
                             # Initial four-velocity.
-                            U0 = gamma0*np.append([c, v0[0], v0[1], v0[2]])
+                            U0 = gamma0*np.asarray([c, v0[0], v0[1], v0[2]])
                             
                             for i_By in range(num_By):
                                 By = param.By[i_By]
