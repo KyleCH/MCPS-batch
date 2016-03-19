@@ -59,13 +59,12 @@ def make_unit_array_2d(a):
 
 def f(t, X, U, qmr, F):
     dX = c*U/U[0]
-    A = np.einsum('ij,j->i', F, U)*F.units*U.units
-    dU = c*qmr/U[0]*A
-    print('F:\n', F,
-        '\nU:\n', U,
-        '\ndX:\n', dX,
-        '\nA:\n', A,
-        '\ndU:\n', dU, '\n')
+    dU = c*qmr/U[0]*np.einsum('ij,j->i', F, U)*F.units*U.units
+    #print('F:\n', F,
+        #'\nU:\n', U,
+        #'\ndX:\n', dX,
+        #'\nA:\n', A,
+        #'\ndU:\n', dU, '\n')
     return dX, dU
 
 # ======================================================================
@@ -113,7 +112,7 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
                 #+str(F[2,0])+'\t'+str(F[2,1])+'\t'+str(F[2,2])+'\t'+str(F[2,3])+'\t'
                 #+str(F[3,0])+'\t'+str(F[3,1])+'\t'+str(F[3,2])+'\t'+str(F[3,3])
                 )
-            a = input('>>> ')
+            #a = input('>>> ')
         
 
 # ======================================================================
