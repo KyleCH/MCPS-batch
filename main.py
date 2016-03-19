@@ -232,4 +232,5 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
                                         + '\n\tU0:\t' + str(U0))
                                     
                                     # Solve.
-                                    iterator(fname, h, t0, X0, U0, qmr, F)
+                                    iterator(opath+ofile_name,
+                                        h, t0, X0, U0, qmr, F)
