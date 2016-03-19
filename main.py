@@ -58,7 +58,15 @@ def make_unit_array_2d(a):
 # ======================================================================
 
 def f(t, X, U, qmr, F):
-    return c*U/U[0], c*qmr/U[0]*np.einsum('ij,j->i', F, U)
+    dX = c*U/U[0]
+    A = np.einsum('ij,j->i', F, U)*F.units*U.units
+    dU = c*qmr/U[0]*A
+    print('F:\n', F,
+        '\nU:\n', U,
+        '\ndX:\n', dX,
+        '\nA:\n', A,
+        '\ndU:\n', dU, '\n')
+    return dX, dU
 
 # ======================================================================
 
