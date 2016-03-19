@@ -30,7 +30,8 @@ vhat0 = np.asarray([[0., 0., 1.]])
 q = Q_(np.asarray([1.]), 'e')
 
 # Mass.
-m = np.asarray([Q_(const.value('proton mass'), const.unit('proton mass'))])
+m = Q_(const.value('proton mass'), const.unit('proton mass'))
+m = np.asarray([m])
 
 # Initial kinetic energy.
 T0 = Q_(np.asarray([6.]), 'MeV')
