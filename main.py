@@ -194,7 +194,7 @@ with open(opath + 'parameter_log.txt', 'w') as plog:
                                 F = np.asarray(
                                     [[  0., Ex_c, Ey_c, Ez_c],
                                      [Ex_c,   0.,   Bz,  -By],
-                                     [Ey_c,  -Bz,    0.,  B_x],
+                                     [Ey_c,  -Bz,    0.,  Bx],
                                      [Ez_c,   By,   -Bx,  0.]])
                                 
                                 for i_h in range(num_h):
