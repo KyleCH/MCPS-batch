@@ -28,11 +28,10 @@ metric = np.asarray(
 
 def setutc():
     import datetime
-    import string
     utcwhen = str(datetime.datetime.utcnow())
-    utcwhen = utcwhen[0:string.rfind(utcwhen, '.')]
-    utcwhen_ = string.replace(utcwhen, ' ', '_')
-    utcwhen_ = string.replace(utcwhen_, ':', '-')
+    utcwhen = utcwhen[0:utcwhen.rfind('.')]
+    utcwhen_ = utcwhen.replace(' ', '_')
+    utcwhen_ = utcwhen_.replace(':', '-')
     return utcwhen, utcwhen_
 
 # ======================================================================
