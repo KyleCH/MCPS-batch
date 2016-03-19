@@ -121,13 +121,17 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             + str(X[2].to(printing_units_length).magnitude) + '\t'
             + str(X[3].to(printing_units_length).magnitude) + '\t'
             
-            + str(U[0].to(printing_units_length/printing_units_time).magnitude)
+            + str(U[0].to(printing_units_length+'/'
+                + printing_units_time).magnitude)
             + '\t'
-            + str(U[1].to(printing_units_length/printing_units_time).magnitude)
+            + str(U[1].to(printing_units_length+'/'
+                + printing_units_time).magnitude)
             + '\t'
-            + str(U[2].to(printing_units_length/printing_units_time).magnitude)
+            + str(U[2].to(printing_units_length+'/'
+                + printing_units_time).magnitude)
             + '\t'
-            + str(U[3].to(printing_units_length/printing_units_time).magnitude)
+            + str(U[3].to(printing_units_length+'/'
+                + printing_units_time).magnitude)
             #+ '\t'
             
             #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
@@ -144,17 +148,17 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
                 + str(X[2].to(printing_units_length).magnitude) + '\t'
                 + str(X[3].to(printing_units_length).magnitude) + '\t'
                 
-                + str(U[0].to(printing_units_length/printing_units_time
-                    ).magnitude)
+                + str(U[0].to(printing_units_length+'/'
+                    + printing_units_time).magnitude)
                 + '\t'
-                + str(U[1].to(printing_units_length/printing_units_time
-                    ).magnitude)
+                + str(U[1].to(printing_units_length+'/'
+                    + printing_units_time).magnitude)
                 + '\t'
-                + str(U[2].to(printing_units_length/printing_units_time
-                    ).magnitude)
+                + str(U[2].to(printing_units_length+'/'
+                    + printing_units_time).magnitude)
                 + '\t'
-                + str(U[3].to(printing_units_length/printing_units_time
-                    ).magnitude)
+                + str(U[3].to(printing_units_length+'/'
+                    + printing_units_time).magnitude)
                 #+ '\t'
                 #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
                 #+str(F[1,0])+'\t'+str(F[1,1])+'\t'+str(F[1,2])+'\t'+str(F[1,3])+'\t'
