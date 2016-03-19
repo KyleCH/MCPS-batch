@@ -64,19 +64,22 @@ def f(t, X, U, qmr, F):
 
 # ======================================================================
 
-def step(h, t, y, qmr, F):
-    k1 = f(t, y, qmr, F)
+def step(h, t, X, U, qmr, F):
     hh = .5*h
-    k2 = f(t+hh, y+hh*k1, qmr, F)
-    k3 = f(t+hh, y+hh*k2, qmr, F)
-    k4 = f(t+h, y+h*k3, qmr, F)
-    return t+hh, y+h*(k1+2.*(k2+k3)+k4)/6.
+    k1_X, k1_U = f(   t,         X,         U, qmr, F)
+    k2_X, k2_U = f(t+hh, X+hh*k1_X, U+hh*k1_U, qmr, F)
+    k3_X, k3_U = f(t+hh, X+hh*k2_X, U+hh*k2_U, qmr, F)
+    k4_X, k4_U = f( t+h,  X+h*k3_X,  U+h*k3_U, qmr, F)
+    return (t+hh,
+        X+h*(k1_X+2.*(k2_X+k3_X)+k4_X)/6.,
+        U+h*(k1_U+2.*(k2_U+k3_U)+k4_U)/6.)
 
 # ======================================================================
 
 def iterator(fname, h, t0, X0, U0, qmr, F):
     t = t0
-    y = np.asarray([X0, U0])
+    X = X0
+    U = U0
     with open(fname, 'w') as f:
         f.write('# t\t'
             +'X[0]\tX[1]\tX[2]\tX[3]\t'
@@ -87,18 +90,18 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             #+'F[3, 0]\tF[3, 1]\tF[3, 2]\tF[3, 3]\n'
             +'U[0]\tU[1]\tU[2]\tU[3]\n'
             +str(t) + '\t'
-            +str(y[0,0])+'\t'+str(y[0,1])+'\t'+str(y[0,2])+'\t'+str(y[0,3])+'\t'
-            +str(y[1,0])+'\t'+str(y[1,1])+'\t'+str(y[1,2])+'\t'+str(y[1,3]) #+'\t'
+            +str(X[0])+'\t'+str(X[1])+'\t'+str(X[2])+'\t'+str(X[3])+'\t'
+            +str(U[0])+'\t'+str(U[1])+'\t'+str(U[2])+'\t'+str(U[3]) #+'\t'
             #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
             #+str(F[1,0])+'\t'+str(F[1,1])+'\t'+str(F[1,2])+'\t'+str(F[1,3])+'\t'
             #+str(F[2,0])+'\t'+str(F[2,1])+'\t'+str(F[2,2])+'\t'+str(F[2,3])+'\t'
             #+str(F[3,0])+'\t'+str(F[3,1])+'\t'+str(F[3,2])+'\t'+str(F[3,3])
             )
         for i in range(n):
-            t, y = step(h, t, y, qmr, F)
+            t, X, U = step(h, t, y, qmr, F)
             fname.write(str(t)+'\t'
-                +str(y[0,0])+'\t'+str(y[0,1])+'\t'+str(y[0,2])+'\t'+str(y[0,3])+'\t'
-                +str(y[1,0])+'\t'+str(y[1,1])+'\t'+str(y[1,2])+'\t'+str(y[1,3]) #+'\t'
+                +str(X[0])+'\t'+str(X[1])+'\t'+str(X[2])+'\t'+str(X[3])+'\t'
+                +str(U[0])+'\t'+str(U[1])+'\t'+str(U[2])+'\t'+str(U[3]) #+'\t'
                 #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
                 #+str(F[1,0])+'\t'+str(F[1,1])+'\t'+str(F[1,2])+'\t'+str(F[1,3])+'\t'
                 #+str(F[2,0])+'\t'+str(F[2,1])+'\t'+str(F[2,2])+'\t'+str(F[2,3])+'\t'
