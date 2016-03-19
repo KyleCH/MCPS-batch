@@ -18,11 +18,18 @@ c = Q_(const.value('speed of light in vacuum'),
        const.unit('speed of light in vacuum'))
 
 # Metric tensor.
-metric = np.asarray(
-    [[-1., 0., 0., 0.],
-     [ 0., 1., 0., 0.],
-     [ 0., 0., 1., 0.],
-     [ 0., 0., 0., 1.]])
+#metric = np.asarray(
+#    [[-1., 0., 0., 0.],
+#     [ 0., 1., 0., 0.],
+#     [ 0., 0., 1., 0.],
+#     [ 0., 0., 0., 1.]])
+
+# ======================================================================
+# Printing units.
+# ======================================================================
+
+printing_units_time = 's'
+printing_units_length = 'm'
 
 # ======================================================================
 
@@ -94,9 +101,35 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             #+'F[2, 0]\tF[2, 1]\tF[2, 2]\tF[2, 3]\t'
             #+'F[3, 0]\tF[3, 1]\tF[3, 2]\tF[3, 3]\n'
             +'U[0]\tU[1]\tU[2]\tU[3]\n'
-            +str(t) + '\t'
-            +str(X[0])+'\t'+str(X[1])+'\t'+str(X[2])+'\t'+str(X[3])+'\t'
-            +str(U[0])+'\t'+str(U[1])+'\t'+str(U[2])+'\t'+str(U[3]) #+'\t'
+            
+            + '# (' + printing_units_time + ')\t('
+            
+            + '(' + printing_units_length + ')\t'
+            + '(' + printing_units_length + ')\t'
+            + '(' + printing_units_length + ')\t'
+            + '(' + printing_units_length + ')\t'
+            
+            + '(' + printing_units_length + '/' + printing_units_time + ')\t'
+            + '(' + printing_units_length + '/' + printing_units_time + ')\t'
+            + '(' + printing_units_length + '/' + printing_units_time + ')\t'
+            + '(' + printing_units_length + '/' + printing_units_time + ')\n'
+            
+            + str(t.to(printing_units_time).magnitude) + '\t'
+            
+            + str(X[0].to(printing_units_length).magnitude) + '\t'
+            + str(X[1].to(printing_units_length).magnitude) + '\t'
+            + str(X[2].to(printing_units_length).magnitude) + '\t'
+            + str(X[3].to(printing_units_length).magnitude) + '\t'
+            
+            + str(U[0].to(printing_units_length/printing_units_time).magnitude)
+            + '\t'
+            + str(U[1].to(printing_units_length/printing_units_time).magnitude)
+            + '\t'
+            + str(U[2].to(printing_units_length/printing_units_time).magnitude)
+            + '\t'
+            + str(U[3].to(printing_units_length/printing_units_time).magnitude)
+            #+ '\t'
+            
             #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
             #+str(F[1,0])+'\t'+str(F[1,1])+'\t'+str(F[1,2])+'\t'+str(F[1,3])+'\t'
             #+str(F[2,0])+'\t'+str(F[2,1])+'\t'+str(F[2,2])+'\t'+str(F[2,3])+'\t'
@@ -104,16 +137,30 @@ def iterator(fname, h, t0, X0, U0, qmr, F):
             )
         for i in range(n):
             t, X, U = step(h, t, X, U, qmr, F)
-            f.write('\n' + str(t)+'\t'
-                +str(X[0])+'\t'+str(X[1])+'\t'+str(X[2])+'\t'+str(X[3])+'\t'
-                +str(U[0])+'\t'+str(U[1])+'\t'+str(U[2])+'\t'+str(U[3]) #+'\t'
+            f.write('\n' + str(t.to(printing_units_time).magnitude) + '\t'
+                
+                + str(X[0].to(printing_units_length).magnitude) + '\t'
+                + str(X[1].to(printing_units_length).magnitude) + '\t'
+                + str(X[2].to(printing_units_length).magnitude) + '\t'
+                + str(X[3].to(printing_units_length).magnitude) + '\t'
+                
+                + str(U[0].to(printing_units_length/printing_units_time
+                    ).magnitude)
+                + '\t'
+                + str(U[1].to(printing_units_length/printing_units_time
+                    ).magnitude)
+                + '\t'
+                + str(U[2].to(printing_units_length/printing_units_time
+                    ).magnitude)
+                + '\t'
+                + str(U[3].to(printing_units_length/printing_units_time
+                    ).magnitude)
+                #+ '\t'
                 #+str(F[0,0])+'\t'+str(F[0,1])+'\t'+str(F[0,2])+'\t'+str(F[0,3])+'\t'
                 #+str(F[1,0])+'\t'+str(F[1,1])+'\t'+str(F[1,2])+'\t'+str(F[1,3])+'\t'
                 #+str(F[2,0])+'\t'+str(F[2,1])+'\t'+str(F[2,2])+'\t'+str(F[2,3])+'\t'
                 #+str(F[3,0])+'\t'+str(F[3,1])+'\t'+str(F[3,2])+'\t'+str(F[3,3])
                 )
-            #a = input('>>> ')
-        
 
 # ======================================================================
 # Setup output directory and parameter log.
